@@ -24,7 +24,7 @@ import java.beans.PropertyChangeSupport;
  */
 
 /**
- * [Ryan Test] Implements a clock as a Runnable. An object adapter that uses
+ * Implements a clock as a Runnable. An object adapter that uses
  * PropertyChangeSupport to implement the Observable part of the Observer
  * pattern.
  *
