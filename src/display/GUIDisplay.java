@@ -1,15 +1,5 @@
 package display;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import buttons.AwayButton;
 import buttons.ButtonEight;
 import buttons.ButtonFive;
@@ -29,6 +19,13 @@ import checkboxes.GUICheckbox;
 import checkboxes.ZoneOneCheckbox;
 import checkboxes.ZoneThreeCheckbox;
 import checkboxes.ZoneTwoCheckbox;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class GUIDisplay extends Application implements AlarmDisplay {
 	private GUIButton buttonOne;
@@ -125,5 +122,11 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 
 	public static void main(String[] args) {
 		Application.launch(args);
+	}
+
+	@Override
+	public void showTimeLeft(int time) {
+		// TODO Auto-generated method stub
+
 	}
 }

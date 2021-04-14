@@ -1,5 +1,8 @@
 package states;
 
+import display.AlarmDisplay;
+import events.AwayEvent;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -26,6 +29,8 @@ package states;
  *
  */
 public class AlarmContext {
+	private AlarmDisplay display;
+	private AlarmState currentState;
 	private static AlarmContext instance;
 
 	/**
@@ -33,6 +38,7 @@ public class AlarmContext {
 	 */
 	private AlarmContext() {
 		instance = this;
+		currentState = UnarmedState.instance();
 	}
 
 	/**
@@ -45,6 +51,51 @@ public class AlarmContext {
 			instance = new AlarmContext();
 		}
 		return instance;
+	}
+
+	/**
+	 * The display could change. So we have to get its refrence.
+	 * 
+	 * @param display
+	 *            The current display object
+	 */
+	public void setDisplay(AlarmDisplay display) {
+		this.display = display;
+	}
+
+	/**
+	 * Lets Unarmed state be the starting state adds the object as an observable
+	 * for clock
+	 */
+	public void initialize() {
+		instance.changeState(UnarmedState.instance());
+	}
+
+	/**
+	 * Called from the states to change the current state
+	 * 
+	 * @param nextState
+	 *            the next state
+	 */
+	public void changeState(AlarmState nextState) {
+		currentState.leave();
+		currentState = nextState;
+		currentState.enter();
+	}
+
+	public void handleEvent(AwayEvent event) {
+		currentState.handleEvent(event);
+	}
+
+	/**
+	 * This invokes the right method of the display. This helps protect the
+	 * states from changes to the way the system utilizes the state changes.
+	 * 
+	 * @param time
+	 *            time left for cooking
+	 */
+	public void showTimeLeft(int time) {
+		display.showTimeLeft(time);
 	}
 
 	// There were several more methods in MicrowaveContext that will probably be

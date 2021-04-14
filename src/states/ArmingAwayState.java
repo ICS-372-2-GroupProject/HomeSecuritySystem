@@ -1,4 +1,9 @@
 package states;
+import events.AwayEvent;
+import events.TimerRanOutEvent;
+import events.TimerTickedEvent;
+import timer.Notifiable;
+import timer.Timer;
 
 /**
  * 
@@ -24,8 +29,9 @@ package states;
  * Represents the alarm ready state
  *
  */
-public class ArmingAwayState extends AlarmState {
+public class ArmingAwayState extends AlarmState implements Notifiable {
 	private static ArmingAwayState instance;
+	private Timer timer;
 
 	/**
 	 * Private constructor for the singleton pattern
@@ -45,15 +51,43 @@ public class ArmingAwayState extends AlarmState {
 		return instance;
 	}
 
+	/**
+	 * Process Cook request
+	 */
+	@Override
+	public void handleEvent(AwayEvent event) {
+		timer.addTimeValue(10);
+		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+	}
+
+	/**
+	 * Initializes the state Adds itself as a listener to managers Updates the
+	 * displays
+	 * 
+	 */
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
-
+		timer = new Timer(this, 10);
+		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 	}
 
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
+		timer.stop();
+		timer = null;
+		AlarmContext.instance().showTimeLeft(0);
+	}
+
+	@Override
+	public void handleEvent(TimerTickedEvent event) {
+		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+
+	}
+
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		AlarmContext.instance().showTimeLeft(0);
+		AlarmContext.instance().changeState(ArmedAwayState.instance());
 
 	}
 
