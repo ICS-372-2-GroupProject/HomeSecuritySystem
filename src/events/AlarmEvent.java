@@ -9,4 +9,8 @@ package events;
  */
 public class AlarmEvent {
 
+    // Fields for potential use to reduce redundant events.
+    protected static final int AWAY_PROCESS = 0;
+    protected static final int STAY_PROCESS = 1;
+
 }
