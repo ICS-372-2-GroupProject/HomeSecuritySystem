@@ -1,5 +1,12 @@
 package states;
 
+import events.MovementEvent;
+import events.TimerRanOutEvent;
+import events.TimerTickedEvent;
+import events.ZoneUnreadyEvent;
+import timer.Notifiable;
+import timer.Timer;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -24,8 +31,9 @@ package states;
  * Represents the alarm warning state
  *
  */
-public class WarningState extends AlarmState {
+public class WarningState extends AlarmState implements Notifiable {
     private static WarningState instance;
+    private Timer timer;
 
     /**
      * Private constructor for the singleton pattern
@@ -45,15 +53,52 @@ public class WarningState extends AlarmState {
         return instance;
     }
 
+    /**
+     * Process movement warning request
+     */
+    @Override
+    public void handleEvent(MovementEvent event) {
+        timer.addTimeValue(15);
+        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+    }
+
+    /**
+     * Process zone unready warning request
+     */
+    @Override
+    public void handleEvent(ZoneUnreadyEvent event) {
+        timer.addTimeValue(15);
+        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+    }
+
+    /**
+     * Initializes the state Adds itself as a listener to managers Updates the
+     * displays
+     * 
+     */
     @Override
     public void enter() {
-        // TODO Auto-generated method stub
-
+        timer = new Timer(this, 15);
+        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
     }
 
     @Override
     public void leave() {
-        // TODO Auto-generated method stub
+        timer.stop();
+        timer = null;
+        AlarmContext.instance().showTimeLeft(0);
+    }
+
+    @Override
+    public void handleEvent(TimerTickedEvent event) {
+        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+
+    }
+
+    @Override
+    public void handleEvent(TimerRanOutEvent event) {
+        AlarmContext.instance().showTimeLeft(0);
+        AlarmContext.instance().changeState(BreachedState.instance());
 
     }
 

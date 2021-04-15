@@ -53,7 +53,7 @@ public class AwayArmingState extends AlarmState implements Notifiable {
     }
 
     /**
-     * Process Cook request
+     * Process Away arm request
      */
     @Override
     public void handleEvent(AwayButtonEvent event) {

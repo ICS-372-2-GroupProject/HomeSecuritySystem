@@ -53,7 +53,7 @@ public class StayArmingState extends AlarmState implements Notifiable {
     }
 
     /**
-     * Process Cook request
+     * Process Stay arm request
      */
     @Override
     public void handleEvent(StayButtonEvent event) {
