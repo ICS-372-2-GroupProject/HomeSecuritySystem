@@ -1,7 +1,7 @@
 package events;
 
 /**
- * Represents the door close operation
+ * Represents the operation for entering the correct password
  *
  */
 public class PasswordEvent extends AlarmEvent {

@@ -1,7 +1,7 @@
 package events;
 
 /**
- * Represents the door close operation
+ * Represents the operation for when the timer runs out
  *
  */
 public class TimeoutEvent extends AlarmEvent {

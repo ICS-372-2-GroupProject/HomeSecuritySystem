@@ -1,7 +1,7 @@
 package events;
 
 /**
- * Represents the door close operation
+ * Represents the circumstance of movement in the house
  *
  */
 public class MovementEvent extends AlarmEvent {

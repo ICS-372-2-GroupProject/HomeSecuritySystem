@@ -1,7 +1,7 @@
 package events;
 
 /**
- * Represents the door close operation
+ * Represents the operation for pushing the Stay button.
  *
  */
 public class StayEvent extends AlarmEvent {

@@ -1,7 +1,7 @@
 package events;
 
 /**
- * Represents the door close operation
+ * Represents the operation for pushing the Cancel button.
  *
  */
 public class CancelEvent extends AlarmEvent {

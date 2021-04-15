@@ -1,7 +1,7 @@
 package events;
 
 /**
- * Represents the door close operation
+ * Represents the circumstance of any zone being unready
  *
  */
 public class ZoneUnreadyEvent extends AlarmEvent {
