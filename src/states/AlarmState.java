@@ -5,7 +5,8 @@ import events.CancelButtonEvent;
 import events.MovementEvent;
 import events.PasswordEvent;
 import events.StayButtonEvent;
-import events.TimeoutEvent;
+import events.TimerRanOutEvent;
+import events.TimerTickedEvent;
 import events.ZoneUnreadyEvent;
 import events.ZonesReadyEvent;
 
@@ -90,14 +91,6 @@ public abstract class AlarmState {
     }
 
     /**
-     * Process timeout request
-     *
-     */
-    public void handleEvent(TimeoutEvent event) {
-
-    }
-
-    /**
      * Process all zones ready request
      *
      */
@@ -110,6 +103,22 @@ public abstract class AlarmState {
      *
      */
     public void handleEvent(ZoneUnreadyEvent event) {
+
+    }
+
+    /**
+     * Process timer runs out request
+     *
+     */
+    public void handleEvent(TimerRanOutEvent event) {
+
+    }
+
+    /**
+     * Process timer ticks request
+     *
+     */
+    public void handleEvent(TimerTickedEvent event) {
 
     }
 

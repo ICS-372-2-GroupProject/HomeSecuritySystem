@@ -24,13 +24,13 @@ package states;
  * Represents the alarm triggered state
  *
  */
-public class BreachState extends AlarmState {
-    private static BreachState instance;
+public class WarningState extends AlarmState {
+    private static WarningState instance;
 
     /**
      * Private constructor for the singleton pattern
      */
-    private BreachState() {
+    private WarningState() {
     }
 
     /**
@@ -38,9 +38,9 @@ public class BreachState extends AlarmState {
      * 
      * @return this object
      */
-    public static BreachState instance() {
+    public static WarningState instance() {
         if (instance == null) {
-            instance = new BreachState();
+            instance = new WarningState();
         }
         return instance;
     }
