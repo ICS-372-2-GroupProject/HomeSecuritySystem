@@ -10,4 +10,9 @@ public interface AlarmDisplay {
 	 */
 	public void showTimeLeft(int time);
 
+	/**
+	 * Indicate that the light is on
+	 */
+	void showAway();
+
 }

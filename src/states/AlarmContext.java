@@ -98,6 +98,14 @@ public class AlarmContext {
 		display.showTimeLeft(time);
 	}
 
+	/**
+	 * @param time
+	 *            time left for cooking
+	 */
+	public void showAway() {
+		display.showAway();
+	}
+
 	// There were several more methods in MicrowaveContext that will probably be
 	// needed in here.
 	// Right now I'm just trying to get the GUI to display...

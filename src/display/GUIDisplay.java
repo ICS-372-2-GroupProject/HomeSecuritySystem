@@ -20,12 +20,15 @@ import checkboxes.ZoneOneCheckbox;
 import checkboxes.ZoneThreeCheckbox;
 import checkboxes.ZoneTwoCheckbox;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import states.AlarmContext;
 
 public class GUIDisplay extends Application implements AlarmDisplay {
 	private GUIButton buttonOne;
@@ -48,13 +51,17 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	private Label readyStatusLabel;
 	private TextField statusScreen;
 	private static AlarmDisplay display;
+	private AlarmContext alarmContext;
 
 	private static AlarmDisplay getInstance() {
 		return display;
 	}
 
 	public void start(Stage primaryStage) throws Exception {
+		alarmContext = AlarmContext.instance();
+		alarmContext.setDisplay(this);
 		display = this;
+
 		buttonOne = new ButtonOne("1");
 		buttonTwo = new ButtonTwo("2");
 		buttonThree = new ButtonThree("3");
@@ -117,7 +124,24 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		Scene scene = new Scene(mainPane);
 		primaryStage.setTitle("Security System");
 		primaryStage.setScene(scene);
+
+		try {
+			while (alarmContext == null) {
+				Thread.sleep(1000);
+			}
+		} catch (Exception e) {
+
+		}
+
 		primaryStage.show();
+		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST,
+				new EventHandler<WindowEvent>() {
+					@Override
+					public void handle(WindowEvent window) {
+						System.exit(0);
+					}
+				});
+
 	}
 
 	public static void main(String[] args) {
@@ -129,4 +153,13 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		// TODO Auto-generated method stub
 
 	}
+
+	/**
+	 * Indicate that the light is on
+	 */
+	@Override
+	public void showAway() {
+		statusScreen.setText("Away");
+	}
+
 }
