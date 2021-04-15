@@ -4,14 +4,14 @@ package events;
  * Represents the operation for pushing the Cancel button.
  *
  */
-public class CancelEvent extends AlarmEvent {
-    private static CancelEvent instance;
+public class CancelButtonEvent extends AlarmEvent {
+    private static CancelButtonEvent instance;
 
     /**
      * Private for singleton
      * 
      */
-    private CancelEvent() {
+    private CancelButtonEvent() {
 
     }
 
@@ -20,9 +20,9 @@ public class CancelEvent extends AlarmEvent {
      * 
      * @return the only instance
      */
-    public static CancelEvent instance() {
+    public static CancelButtonEvent instance() {
         if (instance == null) {
-            instance = new CancelEvent();
+            instance = new CancelButtonEvent();
         }
         return instance;
     }

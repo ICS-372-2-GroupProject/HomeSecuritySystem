@@ -1,5 +1,5 @@
 package states;
-import events.AwayEvent;
+import events.AwayButtonEvent;
 import events.TimerRanOutEvent;
 import events.TimerTickedEvent;
 import timer.Notifiable;
@@ -55,7 +55,7 @@ public class ArmingAwayState extends AlarmState implements Notifiable {
 	 * Process Cook request
 	 */
 	@Override
-	public void handleEvent(AwayEvent event) {
+	public void handleEvent(AwayButtonEvent event) {
 		timer.addTimeValue(10);
 		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 	}

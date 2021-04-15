@@ -4,14 +4,14 @@ package events;
  * Represents the operation for pushing the Away button.
  *
  */
-public class AwayEvent extends AlarmEvent {
-    private static AwayEvent instance;
+public class AwayButtonEvent extends AlarmEvent {
+    private static AwayButtonEvent instance;
 
     /**
      * Private for singleton
      * 
      */
-    private AwayEvent() {
+    private AwayButtonEvent() {
 
     }
 
@@ -20,9 +20,9 @@ public class AwayEvent extends AlarmEvent {
      * 
      * @return the only instance
      */
-    public static AwayEvent instance() {
+    public static AwayButtonEvent instance() {
         if (instance == null) {
-            instance = new AwayEvent();
+            instance = new AwayButtonEvent();
         }
         return instance;
     }

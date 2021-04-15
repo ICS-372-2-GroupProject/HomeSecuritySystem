@@ -1,6 +1,13 @@
 package states;
 
-import events.AwayEvent;
+import events.AwayButtonEvent;
+import events.CancelButtonEvent;
+import events.MovementEvent;
+import events.PasswordEvent;
+import events.StayButtonEvent;
+import events.TimeoutEvent;
+import events.ZoneUnreadyEvent;
+import events.ZonesReadyEvent;
 
 /**
  * 
@@ -28,21 +35,82 @@ import events.AwayEvent;
  */
 public abstract class AlarmState {
 
-	/**
-	 * Initializes the state
-	 */
-	public abstract void enter();
+    // Fields for potential use to reduce redundant states.
+    protected static final int AWAY_PROCESS = 0;
+    protected static final int STAY_PROCESS = 1;
 
-	/**
-	 * Performs any necessary clean up while leaving the state
-	 */
-	public abstract void leave();
+    /**
+     * Initializes the state
+     */
+    public abstract void enter();
 
-	/**
-	 * Process door close request
-	 */
-	public void handleEvent(AwayEvent event) {
+    /**
+     * Performs any necessary clean up while leaving the state
+     */
+    public abstract void leave();
 
-	}
+    /**
+     * Process Away button request
+     *
+     */
+    public void handleEvent(AwayButtonEvent event) {
+
+    }
+
+    /**
+     * Process Stay button request
+     * 
+     */
+    public void handleEvent(StayButtonEvent event) {
+
+    }
+
+    /**
+     * Process Cancel button request
+     *
+     */
+    public void handleEvent(CancelButtonEvent event) {
+
+    }
+
+    /**
+     * Process movement detected request
+     *
+     */
+    public void handleEvent(MovementEvent event) {
+
+    }
+
+    /**
+     * Process correct password request
+     *
+     */
+    public void handleEvent(PasswordEvent event) {
+
+    }
+
+    /**
+     * Process timeout request
+     *
+     */
+    public void handleEvent(TimeoutEvent event) {
+
+    }
+
+    /**
+     * Process all zones ready request
+     *
+     */
+    public void handleEvent(ZonesReadyEvent event) {
+
+    }
+
+    /**
+     * Process any zone unready request
+     *
+     */
+    public void handleEvent(ZoneUnreadyEvent event) {
+
+    }
 
 }

@@ -4,14 +4,14 @@ package events;
  * Represents the operation for pushing the Stay button.
  *
  */
-public class StayEvent extends AlarmEvent {
-    private static StayEvent instance;
+public class StayButtonEvent extends AlarmEvent {
+    private static StayButtonEvent instance;
 
     /**
      * Private for singleton
      * 
      */
-    private StayEvent() {
+    private StayButtonEvent() {
 
     }
 
@@ -20,9 +20,9 @@ public class StayEvent extends AlarmEvent {
      * 
      * @return the only instance
      */
-    public static StayEvent instance() {
+    public static StayButtonEvent instance() {
         if (instance == null) {
-            instance = new StayEvent();
+            instance = new StayButtonEvent();
         }
         return instance;
     }
