@@ -21,16 +21,16 @@ package states;
  */
 
 /**
- * Represents the alarm triggered state
+ * Represents the Stay confirm state
  *
  */
-public class BreachState extends AlarmState {
-    private static BreachState instance;
+public class StayConfirmState extends AlarmState {
+    private static StayConfirmState instance;
 
     /**
      * Private constructor for the singleton pattern
      */
-    private BreachState() {
+    private StayConfirmState() {
     }
 
     /**
@@ -38,9 +38,9 @@ public class BreachState extends AlarmState {
      * 
      * @return this object
      */
-    public static BreachState instance() {
+    public static StayConfirmState instance() {
         if (instance == null) {
-            instance = new BreachState();
+            instance = new StayConfirmState();
         }
         return instance;
     }

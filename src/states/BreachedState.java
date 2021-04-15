@@ -21,40 +21,40 @@ package states;
  */
 
 /**
- * Represents the alarm ready state
+ * Represents the alarm breached state
  *
  */
-public class ArmedAwayState extends AlarmState {
-	private static ArmedAwayState instance;
+public class BreachedState extends AlarmState {
+    private static BreachedState instance;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private ArmedAwayState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private BreachedState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static ArmedAwayState instance() {
-		if (instance == null) {
-			instance = new ArmedAwayState();
-		}
-		return instance;
-	}
+    /**
+     * returns the instance
+     * 
+     * @return this object
+     */
+    public static BreachedState instance() {
+        if (instance == null) {
+            instance = new BreachedState();
+        }
+        return instance;
+    }
 
-	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
+    @Override
+    public void enter() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void leave() {
-		// TODO Auto-generated method stub
+    @Override
+    public void leave() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

@@ -21,40 +21,40 @@ package states;
  */
 
 /**
- * Represents the alarm ready state
+ * Represents the Away confirm state
  *
  */
-public class ConfirmAwayState extends AlarmState {
-	private static ConfirmAwayState instance;
+public class AwayConfirmState extends AlarmState {
+    private static AwayConfirmState instance;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private ConfirmAwayState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private AwayConfirmState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static ConfirmAwayState instance() {
-		if (instance == null) {
-			instance = new ConfirmAwayState();
-		}
-		return instance;
-	}
+    /**
+     * returns the instance
+     * 
+     * @return this object
+     */
+    public static AwayConfirmState instance() {
+        if (instance == null) {
+            instance = new AwayConfirmState();
+        }
+        return instance;
+    }
 
-	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
+    @Override
+    public void enter() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void leave() {
-		// TODO Auto-generated method stub
+    @Override
+    public void leave() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

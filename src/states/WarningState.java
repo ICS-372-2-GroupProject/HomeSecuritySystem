@@ -21,7 +21,7 @@ package states;
  */
 
 /**
- * Represents the alarm triggered state
+ * Represents the alarm warning state
  *
  */
 public class WarningState extends AlarmState {
