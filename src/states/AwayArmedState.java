@@ -1,5 +1,9 @@
 package states;
 
+import events.MovementEvent;
+import events.ZoneUnreadyEvent;
+import timer.Notifiable;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -24,37 +28,53 @@ package states;
  * Represents the Away armed state
  *
  */
-public class AwayArmedState extends AlarmState {
-    private static AwayArmedState instance;
+public class AwayArmedState extends AlarmState implements Notifiable {
+	private static AwayArmedState instance;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private AwayArmedState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private AwayArmedState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static AwayArmedState instance() {
-        if (instance == null) {
-            instance = new AwayArmedState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static AwayArmedState instance() {
+		if (instance == null) {
+			instance = new AwayArmedState();
+		}
+		return instance;
+	}
 
-    @Override
-    public void enter() {
-        // TODO Auto-generated method stub
+	/**
+	 * Process movement warning request
+	 */
+	@Override
+	public void handleEvent(ZoneUnreadyEvent event) {
+		AlarmContext.instance().changeState(WarningState.instance());
+	}
 
-    }
+	/**
+	 * Process movement warning request
+	 */
+	@Override
+	public void handleEvent(MovementEvent event) {
+		AlarmContext.instance().changeState(WarningState.instance());
+	}
 
-    @Override
-    public void leave() {
-        // TODO Auto-generated method stub
+	@Override
+	public void enter() {
+		// TODO Auto-generated method stub
 
-    }
+	}
+
+	@Override
+	public void leave() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

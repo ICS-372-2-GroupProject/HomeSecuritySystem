@@ -32,74 +32,80 @@ import timer.Timer;
  *
  */
 public class WarningState extends AlarmState implements Notifiable {
-    private static WarningState instance;
-    private Timer timer;
+	private static WarningState instance;
+	private Timer timer;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private WarningState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private WarningState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static WarningState instance() {
-        if (instance == null) {
-            instance = new WarningState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static WarningState instance() {
+		if (instance == null) {
+			instance = new WarningState();
+		}
+		return instance;
+	}
 
-    /**
-     * Process movement warning request
-     */
-    @Override
-    public void handleEvent(MovementEvent event) {
-        timer.addTimeValue(15);
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Process movement warning request
+	 */
+	@Override
+	public void handleEvent(MovementEvent event) {
+		timer.addTimeValue(15);
+		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+	}
 
-    /**
-     * Process zone unready warning request
-     */
-    @Override
-    public void handleEvent(ZoneUnreadyEvent event) {
-        timer.addTimeValue(15);
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Process zone unready warning request
+	 */
+	@Override
+	public void handleEvent(ZoneUnreadyEvent event) {
+		timer.addTimeValue(15);
+		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+	}
 
-    /**
-     * Initializes the state Adds itself as a listener to managers Updates the
-     * displays
-     * 
-     */
-    @Override
-    public void enter() {
-        timer = new Timer(this, 15);
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Process clock tick event
+	 */
+	@Override
+	public void handleEvent(TimerTickedEvent event) {
+		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 
-    @Override
-    public void leave() {
-        timer.stop();
-        timer = null;
-        AlarmContext.instance().showTimeLeft(0);
-    }
+	}
 
-    @Override
-    public void handleEvent(TimerTickedEvent event) {
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+	/**
+	 * Process the timer runs out event
+	 */
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		AlarmContext.instance().showTimeLeft(0);
+		AlarmContext.instance().changeState(BreachedState.instance());
 
-    }
+	}
 
-    @Override
-    public void handleEvent(TimerRanOutEvent event) {
-        AlarmContext.instance().showTimeLeft(0);
-        AlarmContext.instance().changeState(BreachedState.instance());
+	/**
+	 * Initializes the state Adds itself as a listener to managers Updates the
+	 * displays
+	 * 
+	 */
+	@Override
+	public void enter() {
+		timer = new Timer(this, 15);
+		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+	}
 
-    }
+	@Override
+	public void leave() {
+		timer.stop();
+		timer = null;
+		AlarmContext.instance().showTimeLeft(0);
+	}
 
 }

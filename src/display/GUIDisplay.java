@@ -53,7 +53,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	private static AlarmDisplay display;
 	private AlarmContext alarmContext;
 
-	private static AlarmDisplay getInstance() {
+	public static AlarmDisplay getInstance() {
 		return display;
 	}
 
@@ -148,10 +148,15 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		Application.launch(args);
 	}
 
+	/**
+	 * display the remaining time
+	 * 
+	 * @param the
+	 *            value remaining
+	 */
 	@Override
-	public void showTimeLeft(int time) {
-		// TODO Auto-generated method stub
-
+	public void showTimeLeft(int value) {
+		statusScreen.setText(" " + value);
 	}
 
 	/**

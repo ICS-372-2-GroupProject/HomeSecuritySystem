@@ -2,6 +2,7 @@ package states;
 
 import display.AlarmDisplay;
 import events.AwayButtonEvent;
+import events.MovementEvent;
 
 /**
  * 
@@ -84,6 +85,10 @@ public class AlarmContext {
 	}
 
 	public void handleEvent(AwayButtonEvent event) {
+		currentState.handleEvent(event);
+	}
+
+	public void handleEvent(MovementEvent event) {
 		currentState.handleEvent(event);
 	}
 
