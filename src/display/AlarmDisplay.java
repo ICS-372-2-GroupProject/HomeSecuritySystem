@@ -22,4 +22,6 @@ public interface AlarmDisplay {
 
 	public boolean checkZones();
 
+	public boolean enterPassword(int number);
+
 }

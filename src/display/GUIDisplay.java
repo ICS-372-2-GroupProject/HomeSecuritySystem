@@ -52,6 +52,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	private TextField statusScreen;
 	private static AlarmDisplay display;
 	private AlarmContext alarmContext;
+	private String password = "";
 
 	public static AlarmDisplay getInstance() {
 		return display;
@@ -134,12 +135,13 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		}
 
 		primaryStage.show();
-		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent window) {
-				System.exit(0);
-			}
-		});
+		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST,
+				new EventHandler<WindowEvent>() {
+					@Override
+					public void handle(WindowEvent window) {
+						System.exit(0);
+					}
+				});
 
 	}
 
@@ -155,7 +157,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	 */
 	@Override
 	public void showTimeLeft(int value) {
-		statusScreen.setText(" " + value);
+		statusScreen.setText("Please Enter Password " + value);
 	}
 
 	@Override
@@ -178,11 +180,33 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 
 	@Override
 	public boolean checkZones() {
-		if (zoneOneCheckbox.isSelected() && zoneTwoCheckbox.isSelected() && zoneThreeCheckbox.isSelected()) {
+		if (zoneOneCheckbox.isSelected() && zoneTwoCheckbox.isSelected()
+				&& zoneThreeCheckbox.isSelected()) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	/*
+	 * Password is 1234
+	 */
+	@Override
+	public boolean enterPassword(int number) {
+		password = password + Integer.toString(number);
+		if (password.length() == 4) {
+			if (password.equals("1234")) {
+				password = "";
+				return true;
+			} else {
+				return false;
+			}
+		} else if (password.length() > 4) {
+			statusScreen.setText("password failed");
+			password = "";
+			return false;
+		} else
+			return false;
 	}
 
 }

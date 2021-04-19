@@ -1,7 +1,9 @@
 package buttons;
 
+import events.PasswordEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import states.AlarmContext;
 
 public class ButtonTwo extends GUIButton implements EventHandler<ActionEvent> {
 	/**
@@ -15,6 +17,8 @@ public class ButtonTwo extends GUIButton implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-
+		if (AlarmContext.instance().enterPassword(2)) {
+			AlarmContext.instance().handleEvent(PasswordEvent.instance());
+		}
 	}
 }
