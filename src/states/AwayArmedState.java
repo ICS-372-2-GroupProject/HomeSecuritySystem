@@ -1,7 +1,7 @@
 package states;
 
 import events.MovementEvent;
-import events.ZoneUnreadyEvent;
+import events.ZonesUnreadyEvent;
 import timer.Notifiable;
 
 /**
@@ -53,7 +53,7 @@ public class AwayArmedState extends AlarmState implements Notifiable {
 	 * Process movement warning request
 	 */
 	@Override
-	public void handleEvent(ZoneUnreadyEvent event) {
+	public void handleEvent(ZonesUnreadyEvent event) {
 		AlarmContext.instance().changeState(WarningState.instance());
 	}
 

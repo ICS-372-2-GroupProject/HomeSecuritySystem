@@ -3,7 +3,7 @@ package states;
 import events.MovementEvent;
 import events.TimerRanOutEvent;
 import events.TimerTickedEvent;
-import events.ZoneUnreadyEvent;
+import events.ZonesUnreadyEvent;
 import timer.Notifiable;
 import timer.Timer;
 
@@ -66,7 +66,7 @@ public class WarningState extends AlarmState implements Notifiable {
 	 * Process zone unready warning request
 	 */
 	@Override
-	public void handleEvent(ZoneUnreadyEvent event) {
+	public void handleEvent(ZonesUnreadyEvent event) {
 		timer.addTimeValue(15);
 		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 	}

@@ -80,7 +80,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		zoneTwoCheckbox = new ZoneTwoCheckbox("Zone 2");
 		zoneThreeCheckbox = new ZoneThreeCheckbox("Zone 3");
 		readyStatusLabel = new Label("Ready Status");
-		statusScreen = new TextField("Ready");
+		statusScreen = new TextField("Not Ready");
 		statusScreen.setPrefWidth(290);
 		statusScreen.setPrefHeight(150);
 		GridPane mainPane = new GridPane();
@@ -134,19 +134,18 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		}
 
 		primaryStage.show();
-		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST,
-				new EventHandler<WindowEvent>() {
-					@Override
-					public void handle(WindowEvent window) {
-						System.exit(0);
-					}
-				});
+		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent window) {
+				System.exit(0);
+			}
+		});
 
 	}
 
-	public static void main(String[] args) {
-		Application.launch(args);
-	}
+	// public static void main(String[] args) {
+	// Application.launch(args);
+	// }
 
 	/**
 	 * display the remaining time
@@ -159,12 +158,31 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		statusScreen.setText(" " + value);
 	}
 
+	@Override
+	public void showNotReady() {
+		statusScreen.setText("Not Ready");
+	}
+
+	@Override
+	public void showReady() {
+		statusScreen.setText("Ready");
+	}
+
 	/**
 	 * Indicate that the light is on
 	 */
 	@Override
 	public void showAway() {
 		statusScreen.setText("Away");
+	}
+
+	@Override
+	public boolean checkZones() {
+		if (zoneOneCheckbox.isSelected() && zoneTwoCheckbox.isSelected() && zoneThreeCheckbox.isSelected()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

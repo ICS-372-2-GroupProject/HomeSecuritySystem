@@ -3,6 +3,8 @@ package states;
 import display.AlarmDisplay;
 import events.AwayButtonEvent;
 import events.MovementEvent;
+import events.ZonesReadyEvent;
+import events.ZonesUnreadyEvent;
 
 /**
  * 
@@ -64,9 +66,13 @@ public class AlarmContext {
 		this.display = display;
 	}
 
+	public boolean getZoneReadiness() {
+		return display.checkZones();
+	}
+
 	/**
-	 * Lets Unarmed state be the starting state adds the object as an observable
-	 * for clock
+	 * Lets Unarmed state be the starting state adds the object as an observable for
+	 * clock
 	 */
 	public void initialize() {
 		instance.changeState(UnarmedState.instance());
@@ -92,15 +98,31 @@ public class AlarmContext {
 		currentState.handleEvent(event);
 	}
 
+	public void handleEvent(ZonesReadyEvent event) {
+		currentState.handleEvent(event);
+	}
+
+	public void handleEvent(ZonesUnreadyEvent event) {
+		currentState.handleEvent(event);
+	}
+
 	/**
-	 * This invokes the right method of the display. This helps protect the
-	 * states from changes to the way the system utilizes the state changes.
+	 * This invokes the right method of the display. This helps protect the states
+	 * from changes to the way the system utilizes the state changes.
 	 * 
 	 * @param time
 	 *            time left for cooking
 	 */
 	public void showTimeLeft(int time) {
 		display.showTimeLeft(time);
+	}
+
+	public void showNotReady() {
+		display.showNotReady();
+	}
+
+	public void showReady() {
+		display.showReady();
 	}
 
 	/**

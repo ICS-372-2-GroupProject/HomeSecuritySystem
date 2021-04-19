@@ -1,5 +1,7 @@
 package states;
 
+import events.ZonesReadyEvent;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -25,36 +27,39 @@ package states;
  *
  */
 public class UnarmedState extends AlarmState {
-    private static UnarmedState instance;
+	private static UnarmedState instance;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private UnarmedState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private UnarmedState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static UnarmedState instance() {
-        if (instance == null) {
-            instance = new UnarmedState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static UnarmedState instance() {
+		if (instance == null) {
+			instance = new UnarmedState();
+		}
+		return instance;
+	}
 
-    @Override
-    public void enter() {
-        // TODO Auto-generated method stub
+	@Override
+	public void handleEvent(ZonesReadyEvent event) {
+		AlarmContext.instance().changeState(ReadyState.instance());
+	}
 
-    }
+	@Override
+	public void enter() {
+		AlarmContext.instance().showNotReady();
+	}
 
-    @Override
-    public void leave() {
-        // TODO Auto-generated method stub
+	@Override
+	public void leave() {
 
-    }
+	}
 
 }

@@ -1,5 +1,9 @@
 package states;
 
+import events.AwayButtonEvent;
+import events.StayButtonEvent;
+import events.ZonesUnreadyEvent;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -46,14 +50,27 @@ public class ReadyState extends AlarmState {
 	}
 
 	@Override
-	public void enter() {
-		// TODO Auto-generated method stub
+	public void handleEvent(AwayButtonEvent event) {
+		AlarmContext.instance().changeState(AwayArmingState.instance());
+	}
 
+	@Override
+	public void handleEvent(StayButtonEvent event) {
+		AlarmContext.instance().changeState(StayArmingState.instance());
+	}
+
+	@Override
+	public void handleEvent(ZonesUnreadyEvent event) {
+		AlarmContext.instance().changeState(UnarmedState.instance());
+	}
+
+	@Override
+	public void enter() {
+		AlarmContext.instance().showReady();
 	}
 
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
 
 	}
 

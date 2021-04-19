@@ -13,6 +13,13 @@ public interface AlarmDisplay {
 	/**
 	 * Indicate that the light is on
 	 */
+
+	public void showNotReady();
+
+	public void showReady();
+
 	void showAway();
+
+	public boolean checkZones();
 
 }
