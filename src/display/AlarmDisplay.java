@@ -29,6 +29,8 @@ public interface AlarmDisplay {
 
 	public void showTimeAway(int time);
 
+	public void showTimeStay(int time);
+
 	public void showEnterPassToCancel();
 
 }

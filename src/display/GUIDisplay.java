@@ -214,6 +214,12 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	}
 
 	@Override
+	public void showTimeStay(int time) {
+		statusScreen.setText("" + time + " seconds for stay");
+
+	}
+
+	@Override
 	public void showStay() {
 		statusScreen.setText("Stay");
 	}

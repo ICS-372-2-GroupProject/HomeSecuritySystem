@@ -67,8 +67,7 @@ public class AwayArmedState extends AlarmState implements Notifiable {
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
-
+		AlarmContext.instance().showAway();
 	}
 
 	@Override

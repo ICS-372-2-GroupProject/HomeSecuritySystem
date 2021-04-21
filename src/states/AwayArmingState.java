@@ -31,65 +31,69 @@ import timer.Timer;
  *
  */
 public class AwayArmingState extends AlarmState implements Notifiable {
-    private static AwayArmingState instance;
-    private Timer timer;
+	private static AwayArmingState instance;
+	private Timer timer;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private AwayArmingState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private AwayArmingState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static AwayArmingState instance() {
-        if (instance == null) {
-            instance = new AwayArmingState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static AwayArmingState instance() {
+		if (instance == null) {
+			instance = new AwayArmingState();
+		}
+		return instance;
+	}
 
-    /**
-     * Process Away arm request
-     */
-    @Override
-    public void handleEvent(AwayButtonEvent event) {
-        timer.addTimeValue(10);
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Process Away arm request
+	 */
+	@Override
+	public void handleEvent(AwayButtonEvent event) {
+		timer.addTimeValue(10);
+		AlarmContext.instance().showTimeAway(timer.getTimeValue());
+	}
 
-    /**
-     * Initializes the state Adds itself as a listener to managers Updates the
-     * displays
-     * 
-     */
-    @Override
-    public void enter() {
-        timer = new Timer(this, 10);
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Initializes the state Adds itself as a listener to managers Updates the
+	 * displays
+	 * 
+	 */
+	@Override
+	public void enter() {
+		timer = new Timer(this, 10);
+		AlarmContext.instance().showTimeAway(timer.getTimeValue());
+	}
 
-    @Override
-    public void leave() {
-        timer.stop();
-        timer = null;
-        AlarmContext.instance().showTimeLeft(0);
-    }
+	@Override
+	public void leave() {
+		timer.stop();
+		timer = null;
+		AlarmContext.instance().showTimeLeft(0);
+	}
 
-    @Override
-    public void handleEvent(TimerTickedEvent event) {
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+	@Override
+	public void handleEvent(TimerTickedEvent event) {
+		AlarmContext.instance().showTimeAway(timer.getTimeValue());
 
-    }
+	}
 
-    @Override
-    public void handleEvent(TimerRanOutEvent event) {
-        AlarmContext.instance().showTimeLeft(0);
-        AlarmContext.instance().changeState(AwayArmedState.instance());
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		AlarmContext.instance().showTimeLeft(0);
+		if (AlarmContext.instance().getZoneReadiness()) {
+			AlarmContext.instance().changeState(AwayArmedState.instance());
+		} else {
+			AlarmContext.instance().changeState(UnarmedState.instance());
+		}
 
-    }
+	}
 
 }
