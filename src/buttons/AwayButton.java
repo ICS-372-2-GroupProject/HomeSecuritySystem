@@ -17,7 +17,6 @@ public class AwayButton extends GUIButton implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		// AlarmContext.instance().showAway();
 		AlarmContext.instance().handleEvent(AwayButtonEvent.instance());
 
 	}

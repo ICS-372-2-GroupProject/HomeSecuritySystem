@@ -25,36 +25,36 @@ package states;
  *
  */
 public class BreachedState extends AlarmState {
-    private static BreachedState instance;
+	private static BreachedState instance;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private BreachedState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private BreachedState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static BreachedState instance() {
-        if (instance == null) {
-            instance = new BreachedState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static BreachedState instance() {
+		if (instance == null) {
+			instance = new BreachedState();
+		}
+		return instance;
+	}
 
-    @Override
-    public void enter() {
-        // TODO Auto-generated method stub
+	@Override
+	public void enter() {
+		AlarmContext.instance().showSecurityBreached();
 
-    }
+	}
 
-    @Override
-    public void leave() {
-        // TODO Auto-generated method stub
+	@Override
+	public void leave() {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
 }

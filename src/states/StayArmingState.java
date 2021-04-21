@@ -1,6 +1,5 @@
 package states;
 
-import events.StayButtonEvent;
 import events.TimerRanOutEvent;
 import events.TimerTickedEvent;
 import timer.Notifiable;
@@ -31,65 +30,59 @@ import timer.Timer;
  *
  */
 public class StayArmingState extends AlarmState implements Notifiable {
-    private static StayArmingState instance;
-    private Timer timer;
+	private static StayArmingState instance;
+	private Timer timer;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private StayArmingState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private StayArmingState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static StayArmingState instance() {
-        if (instance == null) {
-            instance = new StayArmingState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static StayArmingState instance() {
+		if (instance == null) {
+			instance = new StayArmingState();
+		}
+		return instance;
+	}
 
-    /**
-     * Process Stay arm request
-     */
-    @Override
-    public void handleEvent(StayButtonEvent event) {
-        timer.addTimeValue(10);
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	/**
+	 * Initializes the state Adds itself as a listener to managers Updates the
+	 * displays
+	 * 
+	 */
+	@Override
+	public void enter() {
+		timer = new Timer(this, 10);
+		AlarmContext.instance().showTimeStay(timer.getTimeValue());
+	}
 
-    /**
-     * Initializes the state Adds itself as a listener to managers Updates the
-     * displays
-     * 
-     */
-    @Override
-    public void enter() {
-        timer = new Timer(this, 10);
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-    }
+	@Override
+	public void leave() {
+		timer.stop();
+		timer = null;
+		AlarmContext.instance().showTimeStay(0);
+	}
 
-    @Override
-    public void leave() {
-        timer.stop();
-        timer = null;
-        AlarmContext.instance().showTimeLeft(0);
-    }
+	@Override
+	public void handleEvent(TimerTickedEvent event) {
+		AlarmContext.instance().showTimeStay(timer.getTimeValue());
 
-    @Override
-    public void handleEvent(TimerTickedEvent event) {
-        AlarmContext.instance().showTimeLeft(timer.getTimeValue());
+	}
 
-    }
-
-    @Override
-    public void handleEvent(TimerRanOutEvent event) {
-        AlarmContext.instance().showTimeLeft(0);
-        AlarmContext.instance().changeState(StayArmedState.instance());
-
-    }
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		AlarmContext.instance().showTimeStay(0);
+		if (AlarmContext.instance().getZoneReadiness()) {
+			AlarmContext.instance().changeState(StayArmedState.instance());
+		} else {
+			AlarmContext.instance().changeState(UnarmedState.instance());
+		}
+	}
 
 }

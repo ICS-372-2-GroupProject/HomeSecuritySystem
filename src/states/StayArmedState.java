@@ -1,5 +1,8 @@
 package states;
 
+import events.CancelButtonEvent;
+import events.ZonesUnreadyEvent;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -25,36 +28,52 @@ package states;
  *
  */
 public class StayArmedState extends AlarmState {
-    private static StayArmedState instance;
+	private static StayArmedState instance;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private StayArmedState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private StayArmedState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static StayArmedState instance() {
-        if (instance == null) {
-            instance = new StayArmedState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static StayArmedState instance() {
+		if (instance == null) {
+			instance = new StayArmedState();
+		}
+		return instance;
+	}
 
-    @Override
-    public void enter() {
-        // TODO Auto-generated method stub
+	/**
+	 * Process cancel button request
+	 */
+	@Override
+	public void handleEvent(CancelButtonEvent event) {
+		AlarmContext.instance().changeState(AwayDisarmState.instance());
+	}
 
-    }
+	/**
+	 * Process Zone unready
+	 */
+	@Override
+	public void handleEvent(ZonesUnreadyEvent event) {
+		AlarmContext.instance().changeState(BreachedState.instance());
+	}
 
-    @Override
-    public void leave() {
-        // TODO Auto-generated method stub
+	@Override
+	public void enter() {
+		AlarmContext.instance().showStay();
 
-    }
+	}
+
+	@Override
+	public void leave() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

@@ -25,36 +25,35 @@ package states;
  *
  */
 public class StayDisarmState extends AlarmState {
-    private static StayDisarmState instance;
+	private static StayDisarmState instance;
 
-    /**
-     * Private constructor for the singleton pattern
-     */
-    private StayDisarmState() {
-    }
+	/**
+	 * Private constructor for the singleton pattern
+	 */
+	private StayDisarmState() {
+	}
 
-    /**
-     * returns the instance
-     * 
-     * @return this object
-     */
-    public static StayDisarmState instance() {
-        if (instance == null) {
-            instance = new StayDisarmState();
-        }
-        return instance;
-    }
+	/**
+	 * returns the instance
+	 * 
+	 * @return this object
+	 */
+	public static StayDisarmState instance() {
+		if (instance == null) {
+			instance = new StayDisarmState();
+		}
+		return instance;
+	}
 
-    @Override
-    public void enter() {
-        // TODO Auto-generated method stub
+	@Override
+	public void enter() {
+		AlarmContext.instance().showEnterPwdDisarm();
+	}
 
-    }
+	@Override
+	public void leave() {
+		AlarmContext.instance().showNotReady();
 
-    @Override
-    public void leave() {
-        // TODO Auto-generated method stub
-
-    }
+	}
 
 }

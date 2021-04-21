@@ -59,7 +59,6 @@ public class WarningState extends AlarmState implements Notifiable {
 	 */
 	@Override
 	public void handleEvent(MovementEvent event) {
-		// timer.addTimeValue(15);
 		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 	}
 
@@ -105,7 +104,6 @@ public class WarningState extends AlarmState implements Notifiable {
 	public void enter() {
 		timer = new Timer(this, 15);
 		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-		// System.out.println("enter Warning");
 
 	}
 
@@ -114,7 +112,6 @@ public class WarningState extends AlarmState implements Notifiable {
 		timer.stop();
 		timer = null;
 		AlarmContext.instance().showTimeLeft(0);
-		// System.out.println("leave Warning");
 
 	}
 

@@ -225,9 +225,8 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	}
 
 	@Override
-	public void showEnterPassToCancel() {
+	public void showEnterPwdDisarm() {
 		statusScreen.setText("Enter Passwors to Cancel");
-
 	}
 
 }

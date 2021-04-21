@@ -31,6 +31,6 @@ public interface AlarmDisplay {
 
 	public void showTimeStay(int time);
 
-	public void showEnterPassToCancel();
+	public void showEnterPwdDisarm();
 
 }

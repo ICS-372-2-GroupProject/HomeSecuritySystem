@@ -1,5 +1,6 @@
 package states;
 
+import events.CancelButtonEvent;
 import events.MovementEvent;
 import events.ZonesUnreadyEvent;
 import timer.Notifiable;
@@ -63,6 +64,14 @@ public class AwayArmedState extends AlarmState implements Notifiable {
 	@Override
 	public void handleEvent(MovementEvent event) {
 		AlarmContext.instance().changeState(WarningState.instance());
+	}
+
+	/**
+	 * Process cancel button request
+	 */
+	@Override
+	public void handleEvent(CancelButtonEvent event) {
+		AlarmContext.instance().changeState(AwayDisarmState.instance());
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import display.AlarmDisplay;
 import events.AwayButtonEvent;
 import events.MovementEvent;
 import events.PasswordEvent;
+import events.StayButtonEvent;
 import events.ZonesReadyEvent;
 import events.ZonesUnreadyEvent;
 
@@ -97,6 +98,10 @@ public class AlarmContext {
 		currentState.handleEvent(event);
 	}
 
+	public void handleEvent(StayButtonEvent event) {
+		currentState.handleEvent(event);
+	}
+
 	public void handleEvent(PasswordEvent event) {
 		currentState.handleEvent(event);
 	}
@@ -146,8 +151,18 @@ public class AlarmContext {
 		display.showAway();
 	}
 
-	// There were several more methods in MicrowaveContext that will probably be
-	// needed in here.
-	// Right now I'm just trying to get the GUI to display...
+	public void showStay() {
+		display.showStay();
+	}
+
+	public void showSecurityBreached() {
+		display.showSecurityBreached();
+
+	}
+
+	public void showEnterPwdDisarm() {
+		display.showEnterPwdDisarm();
+
+	}
 
 }

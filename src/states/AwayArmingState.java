@@ -1,6 +1,5 @@
 package states;
 
-import events.AwayButtonEvent;
 import events.TimerRanOutEvent;
 import events.TimerTickedEvent;
 import timer.Notifiable;
@@ -53,15 +52,6 @@ public class AwayArmingState extends AlarmState implements Notifiable {
 	}
 
 	/**
-	 * Process Away arm request
-	 */
-	@Override
-	public void handleEvent(AwayButtonEvent event) {
-		timer.addTimeValue(10);
-		AlarmContext.instance().showTimeAway(timer.getTimeValue());
-	}
-
-	/**
 	 * Initializes the state Adds itself as a listener to managers Updates the
 	 * displays
 	 * 
@@ -76,7 +66,7 @@ public class AwayArmingState extends AlarmState implements Notifiable {
 	public void leave() {
 		timer.stop();
 		timer = null;
-		AlarmContext.instance().showTimeLeft(0);
+		AlarmContext.instance().showTimeAway(0);
 	}
 
 	@Override
