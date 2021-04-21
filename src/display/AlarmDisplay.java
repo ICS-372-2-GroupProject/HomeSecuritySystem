@@ -5,8 +5,7 @@ public interface AlarmDisplay {
 	/**
 	 * Displays the time remaining to enter password
 	 * 
-	 * @param time
-	 *            remaining time
+	 * @param time remaining time
 	 */
 	public void showTimeLeft(int time);
 
@@ -18,10 +17,18 @@ public interface AlarmDisplay {
 
 	public void showReady();
 
-	void showAway();
+	public void showAway();
+
+	public void showStay();
 
 	public boolean checkZones();
 
 	public boolean enterPassword(int number);
+
+	public void showSecurityBreached();
+
+	public void showTimeAway(int time);
+
+	public void showEnterPassToCancel();
 
 }

@@ -1,7 +1,6 @@
 package states;
 
 import events.AwayButtonEvent;
-import events.MovementEvent;
 import events.StayButtonEvent;
 import events.ZonesUnreadyEvent;
 
@@ -66,19 +65,12 @@ public class ReadyState extends AlarmState {
 	}
 
 	@Override
-	public void handleEvent(MovementEvent event) {
-		AlarmContext.instance().changeState(WarningState.instance());
-	}
-
-	@Override
 	public void enter() {
 		AlarmContext.instance().showReady();
-		// System.out.println("enter Ready");
 	}
 
 	@Override
 	public void leave() {
-		// System.out.println("leave Ready");
 	}
 
 }

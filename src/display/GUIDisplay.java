@@ -135,25 +135,19 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		}
 
 		primaryStage.show();
-		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST,
-				new EventHandler<WindowEvent>() {
-					@Override
-					public void handle(WindowEvent window) {
-						System.exit(0);
-					}
-				});
+		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent window) {
+				System.exit(0);
+			}
+		});
 
 	}
-
-	// public static void main(String[] args) {
-	// Application.launch(args);
-	// }
 
 	/**
 	 * display the remaining time
 	 * 
-	 * @param the
-	 *            value remaining
+	 * @param the value remaining
 	 */
 	@Override
 	public void showTimeLeft(int value) {
@@ -180,8 +174,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 
 	@Override
 	public boolean checkZones() {
-		if (zoneOneCheckbox.isSelected() && zoneTwoCheckbox.isSelected()
-				&& zoneThreeCheckbox.isSelected()) {
+		if (zoneOneCheckbox.isSelected() && zoneTwoCheckbox.isSelected() && zoneThreeCheckbox.isSelected()) {
 			return true;
 		} else {
 			return false;
@@ -207,6 +200,28 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 			return false;
 		} else
 			return false;
+	}
+
+	@Override
+	public void showSecurityBreached() {
+		statusScreen.setText("Security breached");
+	}
+
+	@Override
+	public void showTimeAway(int time) {
+		statusScreen.setText("" + time + " seconds for away");
+
+	}
+
+	@Override
+	public void showStay() {
+		statusScreen.setText("Stay");
+	}
+
+	@Override
+	public void showEnterPassToCancel() {
+		statusScreen.setText("Enter Passwors to Cancel");
+
 	}
 
 }
