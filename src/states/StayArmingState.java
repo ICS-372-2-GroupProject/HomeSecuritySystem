@@ -58,6 +58,7 @@ public class StayArmingState extends AlarmState implements Notifiable {
 	 */
 	@Override
 	public void enter() {
+		AlarmContext.instance().armingStayOfButton();
 		timer = new Timer(this, 10);
 		AlarmContext.instance().showTimeStay(timer.getTimeValue());
 	}

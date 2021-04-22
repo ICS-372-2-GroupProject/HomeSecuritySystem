@@ -77,6 +77,7 @@ public class AwayArmedState extends AlarmState implements Notifiable {
 	@Override
 	public void enter() {
 		AlarmContext.instance().showAway();
+		AlarmContext.instance().armedAwayOfButton();
 	}
 
 	@Override

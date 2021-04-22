@@ -170,4 +170,45 @@ public class AlarmContext {
 
 	}
 
+	public void readyOfButton() {
+		display.readyOfButton();
+
+	}
+
+	public void armingAwayOfButton() {
+		display.armingAwayOfButton();
+	}
+
+	public void armingStayOfButton() {
+		display.armingStayOfButton();
+	}
+
+	public void armedStayOfButton() {
+		display.armedStayOfButton();
+	}
+
+	public void armedAwayOfButton() {
+		display.armedAwayOfButton();
+	}
+
+	public void disarmAwayOfButton() {
+		display.disarmAwayOfButton();
+	}
+
+	public void disarmStayOfButton() {
+		display.disarmStayOfButton();
+	}
+
+	public void warningOfButton() {
+		display.warningOfButton();
+	}
+
+	public void breachedOfButton() {
+		display.breachedOfButton();
+	}
+
+	public void unarmedOfButton() {
+		display.unarmedOfButton();
+
+	}
 }

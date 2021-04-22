@@ -81,7 +81,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		zoneTwoCheckbox = new ZoneTwoCheckbox("Zone 2");
 		zoneThreeCheckbox = new ZoneThreeCheckbox("Zone 3");
 		readyStatusLabel = new Label("Ready Status");
-		statusScreen = new TextField("Not Ready");
+		statusScreen = new TextField("Not Ready! Please, Close all doors first.");
 		statusScreen.setPrefWidth(290);
 		statusScreen.setPrefHeight(150);
 		GridPane mainPane = new GridPane();
@@ -125,6 +125,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		Scene scene = new Scene(mainPane);
 		primaryStage.setTitle("Security System");
 		primaryStage.setScene(scene);
+		unarmedOfButton();
 
 		try {
 			while (alarmContext == null) {
@@ -229,4 +230,231 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		statusScreen.setText("Enter Passwors to Cancel");
 	}
 
+	@Override
+	public void readyOfButton() {
+		awayButton.setDisable(false);
+		stayButton.setDisable(false);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(false);
+		zoneTwoCheckbox.setDisable(false);
+		zoneThreeCheckbox.setDisable(false);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(true);
+		buttonTwo.setDisable(true);
+		buttonThree.setDisable(true);
+		buttonFour.setDisable(true);
+		buttonFive.setDisable(true);
+		buttonSix.setDisable(true);
+		buttonSeven.setDisable(true);
+		buttonEight.setDisable(true);
+		buttonNine.setDisable(true);
+		buttonZero.setDisable(true);
+
+	}
+
+	@Override
+	public void armingAwayOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(false);
+		zoneTwoCheckbox.setDisable(false);
+		zoneThreeCheckbox.setDisable(false);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(true);
+		buttonTwo.setDisable(true);
+		buttonThree.setDisable(true);
+		buttonFour.setDisable(true);
+		buttonFive.setDisable(true);
+		buttonSix.setDisable(true);
+		buttonSeven.setDisable(true);
+		buttonEight.setDisable(true);
+		buttonNine.setDisable(true);
+		buttonZero.setDisable(true);
+
+	}
+
+	@Override
+	public void armingStayOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(false);
+		zoneTwoCheckbox.setDisable(false);
+		zoneThreeCheckbox.setDisable(false);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(true);
+		buttonTwo.setDisable(true);
+		buttonThree.setDisable(true);
+		buttonFour.setDisable(true);
+		buttonFive.setDisable(true);
+		buttonSix.setDisable(true);
+		buttonSeven.setDisable(true);
+		buttonEight.setDisable(true);
+		buttonNine.setDisable(true);
+		buttonZero.setDisable(true);
+
+	}
+
+	@Override
+	public void armedStayOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(false);
+		zoneOneCheckbox.setDisable(false);
+		zoneTwoCheckbox.setDisable(false);
+		zoneThreeCheckbox.setDisable(false);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(true);
+		buttonTwo.setDisable(true);
+		buttonThree.setDisable(true);
+		buttonFour.setDisable(true);
+		buttonFive.setDisable(true);
+		buttonSix.setDisable(true);
+		buttonSeven.setDisable(true);
+		buttonEight.setDisable(true);
+		buttonNine.setDisable(true);
+		buttonZero.setDisable(true);
+	}
+
+	@Override
+	public void armedAwayOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(false);
+		zoneOneCheckbox.setDisable(false);
+		zoneTwoCheckbox.setDisable(false);
+		zoneThreeCheckbox.setDisable(false);
+		motionDetectorButton.setDisable(false);
+
+		buttonOne.setDisable(true);
+		buttonTwo.setDisable(true);
+		buttonThree.setDisable(true);
+		buttonFour.setDisable(true);
+		buttonFive.setDisable(true);
+		buttonSix.setDisable(true);
+		buttonSeven.setDisable(true);
+		buttonEight.setDisable(true);
+		buttonNine.setDisable(true);
+		buttonZero.setDisable(true);
+
+	}
+
+	@Override
+	public void disarmAwayOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(true);
+		zoneTwoCheckbox.setDisable(true);
+		zoneThreeCheckbox.setDisable(true);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(false);
+		buttonTwo.setDisable(false);
+		buttonThree.setDisable(false);
+		buttonFour.setDisable(false);
+		buttonFive.setDisable(false);
+		buttonSix.setDisable(false);
+		buttonSeven.setDisable(false);
+		buttonEight.setDisable(false);
+		buttonNine.setDisable(false);
+		buttonZero.setDisable(false);
+
+	}
+
+	@Override
+	public void disarmStayOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(true);
+		zoneTwoCheckbox.setDisable(true);
+		zoneThreeCheckbox.setDisable(true);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(false);
+		buttonTwo.setDisable(false);
+		buttonThree.setDisable(false);
+		buttonFour.setDisable(false);
+		buttonFive.setDisable(false);
+		buttonSix.setDisable(false);
+		buttonSeven.setDisable(false);
+		buttonEight.setDisable(false);
+		buttonNine.setDisable(false);
+		buttonZero.setDisable(false);
+
+	}
+
+	@Override
+	public void warningOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(true);
+		zoneTwoCheckbox.setDisable(true);
+		zoneThreeCheckbox.setDisable(true);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(false);
+		buttonTwo.setDisable(false);
+		buttonThree.setDisable(false);
+		buttonFour.setDisable(false);
+		buttonFive.setDisable(false);
+		buttonSix.setDisable(false);
+		buttonSeven.setDisable(false);
+		buttonEight.setDisable(false);
+		buttonNine.setDisable(false);
+		buttonZero.setDisable(false);
+
+	}
+
+	@Override
+	public void breachedOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(true);
+		zoneTwoCheckbox.setDisable(true);
+		zoneThreeCheckbox.setDisable(true);
+		motionDetectorButton.setDisable(true);
+
+		buttonOne.setDisable(false);
+		buttonTwo.setDisable(false);
+		buttonThree.setDisable(false);
+		buttonFour.setDisable(false);
+		buttonFive.setDisable(false);
+		buttonSix.setDisable(false);
+		buttonSeven.setDisable(false);
+		buttonEight.setDisable(false);
+		buttonNine.setDisable(false);
+		buttonZero.setDisable(false);
+
+	}
+
+	@Override
+	public void unarmedOfButton() {
+		awayButton.setDisable(true);
+		stayButton.setDisable(true);
+		cancelButton.setDisable(true);
+		zoneOneCheckbox.setDisable(false);
+		zoneTwoCheckbox.setDisable(false);
+		zoneThreeCheckbox.setDisable(false);
+		motionDetectorButton.setDisable(true);
+		buttonOne.setDisable(true);
+		buttonTwo.setDisable(true);
+		buttonThree.setDisable(true);
+		buttonFour.setDisable(true);
+		buttonFive.setDisable(true);
+		buttonSix.setDisable(true);
+		buttonSeven.setDisable(true);
+		buttonEight.setDisable(true);
+		buttonNine.setDisable(true);
+		buttonZero.setDisable(true);
+
+	}
 }

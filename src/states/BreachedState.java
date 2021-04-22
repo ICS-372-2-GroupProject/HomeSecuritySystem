@@ -62,6 +62,7 @@ public class BreachedState extends AlarmState {
 
 	@Override
 	public void enter() {
+		AlarmContext.instance().breachedOfButton();
 		AlarmContext.instance().showSecurityBreached();
 
 	}

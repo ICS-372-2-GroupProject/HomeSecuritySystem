@@ -33,4 +33,24 @@ public interface AlarmDisplay {
 
 	public void showEnterPwdDisarm();
 
+	public void readyOfButton();
+
+	public void armingAwayOfButton();
+
+	public void armingStayOfButton();
+
+	public void armedStayOfButton();
+
+	public void armedAwayOfButton();
+
+	public void disarmAwayOfButton();
+
+	public void disarmStayOfButton();
+
+	public void warningOfButton();
+
+	public void breachedOfButton();
+
+	public void unarmedOfButton();
+
 }
