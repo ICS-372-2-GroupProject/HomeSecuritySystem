@@ -53,7 +53,7 @@ public class StayArmedState extends AlarmState {
 	 */
 	@Override
 	public void handleEvent(CancelButtonEvent event) {
-		AlarmContext.instance().changeState(AwayDisarmState.instance());
+		AlarmContext.instance().changeState(StayDisarmState.instance());
 	}
 
 	/**

@@ -2,6 +2,7 @@ package states;
 
 import display.AlarmDisplay;
 import events.AwayButtonEvent;
+import events.CancelButtonEvent;
 import events.MovementEvent;
 import events.PasswordEvent;
 import events.StayButtonEvent;
@@ -115,6 +116,10 @@ public class AlarmContext {
 	}
 
 	public void handleEvent(ZonesUnreadyEvent event) {
+		currentState.handleEvent(event);
+	}
+
+	public void handleEvent(CancelButtonEvent event) {
 		currentState.handleEvent(event);
 	}
 

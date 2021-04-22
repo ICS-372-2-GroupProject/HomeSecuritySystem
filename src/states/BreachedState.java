@@ -1,5 +1,7 @@
 package states;
 
+import events.PasswordEvent;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -43,6 +45,19 @@ public class BreachedState extends AlarmState {
 			instance = new BreachedState();
 		}
 		return instance;
+	}
+
+	/**
+	 * Process movement warning request
+	 */
+	@Override
+	public void handleEvent(PasswordEvent event) {
+		if (AlarmContext.instance().getZoneReadiness()) {
+			AlarmContext.instance().changeState(ReadyState.instance());
+		} else {
+
+			AlarmContext.instance().changeState(UnarmedState.instance());
+		}
 	}
 
 	@Override

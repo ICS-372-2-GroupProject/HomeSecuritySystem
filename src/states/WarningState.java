@@ -1,10 +1,8 @@
 package states;
 
-import events.MovementEvent;
 import events.PasswordEvent;
 import events.TimerRanOutEvent;
 import events.TimerTickedEvent;
-import events.ZonesUnreadyEvent;
 import timer.Notifiable;
 import timer.Timer;
 
@@ -58,22 +56,14 @@ public class WarningState extends AlarmState implements Notifiable {
 	 * Process movement warning request
 	 */
 	@Override
-	public void handleEvent(MovementEvent event) {
-		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
-	}
-
-	/**
-	 * Process movement warning request
-	 */
-	@Override
 	public void handleEvent(PasswordEvent event) {
 		AlarmContext.instance().showTimeLeft(0);
-		AlarmContext.instance().changeState(UnarmedState.instance());
-	}
+		if (AlarmContext.instance().getZoneReadiness()) {
+			AlarmContext.instance().changeState(ReadyState.instance());
+		} else {
 
-	@Override
-	public void handleEvent(ZonesUnreadyEvent event) {
-		AlarmContext.instance().changeState(UnarmedState.instance());
+			AlarmContext.instance().changeState(UnarmedState.instance());
+		}
 	}
 
 	/**
@@ -91,7 +81,7 @@ public class WarningState extends AlarmState implements Notifiable {
 	@Override
 	public void handleEvent(TimerRanOutEvent event) {
 		AlarmContext.instance().showTimeLeft(0);
-		AlarmContext.instance().changeState(ReadyState.instance());
+		AlarmContext.instance().changeState(BreachedState.instance());
 
 	}
 

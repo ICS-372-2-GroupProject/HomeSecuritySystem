@@ -77,7 +77,7 @@ public class AwayArmingState extends AlarmState implements Notifiable {
 
 	@Override
 	public void handleEvent(TimerRanOutEvent event) {
-		AlarmContext.instance().showTimeLeft(0);
+		AlarmContext.instance().showTimeAway(0);
 		if (AlarmContext.instance().getZoneReadiness()) {
 			AlarmContext.instance().changeState(AwayArmedState.instance());
 		} else {

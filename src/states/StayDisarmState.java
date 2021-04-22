@@ -1,5 +1,11 @@
 package states;
 
+import events.PasswordEvent;
+import events.TimerRanOutEvent;
+import events.TimerTickedEvent;
+import timer.Notifiable;
+import timer.Timer;
+
 /**
  * 
  * @author Brahma Dathan and Sarnath Ramnath
@@ -24,8 +30,9 @@ package states;
  * Represents the Stay disarm state
  *
  */
-public class StayDisarmState extends AlarmState {
+public class StayDisarmState extends AlarmState implements Notifiable {
 	private static StayDisarmState instance;
+	private Timer timer;
 
 	/**
 	 * Private constructor for the singleton pattern
@@ -45,14 +52,44 @@ public class StayDisarmState extends AlarmState {
 		return instance;
 	}
 
+	/**
+	 * Process movement warning request
+	 */
+	@Override
+	public void handleEvent(PasswordEvent event) {
+		AlarmContext.instance().showTimeLeft(0);
+		if (AlarmContext.instance().getZoneReadiness()) {
+			AlarmContext.instance().changeState(ReadyState.instance());
+		} else {
+
+			AlarmContext.instance().changeState(UnarmedState.instance());
+		}
+	}
+
+	@Override
+	public void handleEvent(TimerTickedEvent event) {
+		AlarmContext.instance().showTimeAway(timer.getTimeValue());
+
+	}
+
+	@Override
+	public void handleEvent(TimerRanOutEvent event) {
+		AlarmContext.instance().showTimeLeft(0);
+		AlarmContext.instance().changeState(StayArmedState.instance());
+
+	}
+
 	@Override
 	public void enter() {
-		AlarmContext.instance().showEnterPwdDisarm();
+		timer = new Timer(this, 10);
+		AlarmContext.instance().showTimeAway(timer.getTimeValue());
 	}
 
 	@Override
 	public void leave() {
-		AlarmContext.instance().showNotReady();
+		timer.stop();
+		timer = null;
+		AlarmContext.instance().showTimeAway(0);
 
 	}
 
