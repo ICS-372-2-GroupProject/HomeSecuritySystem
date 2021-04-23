@@ -66,7 +66,7 @@ public class StayArmedState extends AlarmState {
 
 	@Override
 	public void enter() {
-		AlarmContext.instance().armedStayOfButton();
+//		AlarmContext.instance().armedStayOfButton();
 		AlarmContext.instance().showStay();
 
 	}

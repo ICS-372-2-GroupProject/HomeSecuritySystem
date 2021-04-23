@@ -67,7 +67,7 @@ public class ReadyState extends AlarmState {
 	@Override
 	public void enter() {
 		AlarmContext.instance().showReady();
-		AlarmContext.instance().readyOfButton();
+//		AlarmContext.instance().readyOfButton();
 	}
 
 	@Override

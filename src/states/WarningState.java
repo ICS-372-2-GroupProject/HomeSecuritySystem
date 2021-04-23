@@ -92,7 +92,7 @@ public class WarningState extends AlarmState implements Notifiable {
 	 */
 	@Override
 	public void enter() {
-		AlarmContext.instance().warningOfButton();
+//		AlarmContext.instance().warningOfButton();
 		timer = new Timer(this, 15);
 		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 
