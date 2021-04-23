@@ -125,7 +125,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		Scene scene = new Scene(mainPane);
 		primaryStage.setTitle("Security System");
 		primaryStage.setScene(scene);
-		unarmedOfButton();
+//		unarmedOfButton();
 
 		try {
 			while (alarmContext == null) {
