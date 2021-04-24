@@ -62,7 +62,8 @@ public class AlarmContext {
 	/**
 	 * The display could change. So we have to get its refrence.
 	 * 
-	 * @param display The current display object
+	 * @param display
+	 *            The current display object
 	 */
 	public void setDisplay(AlarmDisplay display) {
 		this.display = display;
@@ -73,12 +74,20 @@ public class AlarmContext {
 	}
 
 	public boolean enterPassword(int number) {
-		return display.enterPassword(number);
+		System.out.println("State = " + currentState);
+		if (currentState == WarningState.instance()
+				|| currentState == BreachedState.instance()
+				|| currentState == AwayDisarmState.instance()
+				|| currentState == StayDisarmState.instance()) {
+
+			return display.enterPassword(number);
+		}
+		return false;
 	}
 
 	/**
-	 * Lets Unarmed state be the starting state adds the object as an observable for
-	 * clock
+	 * Lets Unarmed state be the starting state adds the object as an observable
+	 * for clock
 	 */
 	public void initialize() {
 		instance.changeState(UnarmedState.instance());
@@ -87,7 +96,8 @@ public class AlarmContext {
 	/**
 	 * Called from the states to change the current state
 	 * 
-	 * @param nextState the next state
+	 * @param nextState
+	 *            the next state
 	 */
 	public void changeState(AlarmState nextState) {
 		currentState.leave();
@@ -124,10 +134,11 @@ public class AlarmContext {
 	}
 
 	/**
-	 * This invokes the right method of the display. This helps protect the states
-	 * from changes to the way the system utilizes the state changes.
+	 * This invokes the right method of the display. This helps protect the
+	 * states from changes to the way the system utilizes the state changes.
 	 * 
-	 * @param time time left for cooking
+	 * @param time
+	 *            time left for cooking
 	 */
 	public void showTimeLeft(int time) {
 		display.showTimeLeft(time);
@@ -150,7 +161,8 @@ public class AlarmContext {
 	}
 
 	/**
-	 * @param time time left for cooking
+	 * @param time
+	 *            time left for cooking
 	 */
 	public void showAway() {
 		display.showAway();

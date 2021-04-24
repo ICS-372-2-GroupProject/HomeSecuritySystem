@@ -81,7 +81,8 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		zoneTwoCheckbox = new ZoneTwoCheckbox("Zone 2");
 		zoneThreeCheckbox = new ZoneThreeCheckbox("Zone 3");
 		readyStatusLabel = new Label("Ready Status");
-		statusScreen = new TextField("Not Ready! Please, Close all doors first.");
+		statusScreen = new TextField(
+				"Not Ready! Please, Close all doors first.");
 		statusScreen.setPrefWidth(290);
 		statusScreen.setPrefHeight(150);
 		GridPane mainPane = new GridPane();
@@ -125,7 +126,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		Scene scene = new Scene(mainPane);
 		primaryStage.setTitle("Security System");
 		primaryStage.setScene(scene);
-//		unarmedOfButton();
+		// unarmedOfButton();
 
 		try {
 			while (alarmContext == null) {
@@ -136,19 +137,21 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		}
 
 		primaryStage.show();
-		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent window) {
-				System.exit(0);
-			}
-		});
+		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST,
+				new EventHandler<WindowEvent>() {
+					@Override
+					public void handle(WindowEvent window) {
+						System.exit(0);
+					}
+				});
 
 	}
 
 	/**
 	 * display the remaining time
 	 * 
-	 * @param the value remaining
+	 * @param the
+	 *            value remaining
 	 */
 	@Override
 	public void showTimeLeft(int value) {
@@ -175,7 +178,8 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 
 	@Override
 	public boolean checkZones() {
-		if (zoneOneCheckbox.isSelected() && zoneTwoCheckbox.isSelected() && zoneThreeCheckbox.isSelected()) {
+		if (zoneOneCheckbox.isSelected() && zoneTwoCheckbox.isSelected()
+				&& zoneThreeCheckbox.isSelected()) {
 			return true;
 		} else {
 			return false;
@@ -187,20 +191,23 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	 */
 	@Override
 	public boolean enterPassword(int number) {
+		// boolean state =
+		// AlarmContext.instance().equals(WarningState.instance());
+		// System.out.println("State = " + state);
+		// if (state) {
 		password = password + Integer.toString(number);
 		if (password.length() == 4) {
 			if (password.equals("1234")) {
 				password = "";
 				return true;
 			} else {
+				password = "";
+				statusScreen.setText("password failed");
 				return false;
 			}
-		} else if (password.length() > 4) {
-			statusScreen.setText("password failed");
-			password = "";
-			return false;
-		} else
-			return false;
+		}
+		// }
+		return false;
 	}
 
 	@Override
