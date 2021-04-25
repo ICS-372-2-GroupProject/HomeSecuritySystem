@@ -74,7 +74,6 @@ public class AlarmContext {
 	}
 
 	public boolean enterPassword(int number) {
-		System.out.println("State = " + currentState);
 		if (currentState == WarningState.instance()
 				|| currentState == BreachedState.instance()
 				|| currentState == AwayDisarmState.instance()

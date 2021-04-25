@@ -24,7 +24,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -49,7 +49,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	private GUICheckbox zoneTwoCheckbox;
 	private GUICheckbox zoneThreeCheckbox;
 	private Label readyStatusLabel;
-	private TextField statusScreen;
+	private TextArea statusScreen;
 	private static AlarmDisplay display;
 	private AlarmContext alarmContext;
 	private String password = "";
@@ -81,7 +81,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 		zoneTwoCheckbox = new ZoneTwoCheckbox("Zone 2");
 		zoneThreeCheckbox = new ZoneThreeCheckbox("Zone 3");
 		readyStatusLabel = new Label("Ready Status");
-		statusScreen = new TextField(
+		statusScreen = new TextArea(
 				"Not Ready! Please, Close all doors first.");
 		statusScreen.setPrefWidth(290);
 		statusScreen.setPrefHeight(150);
@@ -191,10 +191,6 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 	 */
 	@Override
 	public boolean enterPassword(int number) {
-		// boolean state =
-		// AlarmContext.instance().equals(WarningState.instance());
-		// System.out.println("State = " + state);
-		// if (state) {
 		password = password + Integer.toString(number);
 		if (password.length() == 4) {
 			if (password.equals("1234")) {
@@ -206,13 +202,13 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 				return false;
 			}
 		}
-		// }
 		return false;
 	}
 
 	@Override
 	public void showSecurityBreached() {
-		statusScreen.setText("Security breached");
+		statusScreen.setText(
+				"Security Breached \nEnter Password to Exit Breached State");
 	}
 
 	@Override
@@ -234,7 +230,7 @@ public class GUIDisplay extends Application implements AlarmDisplay {
 
 	@Override
 	public void showEnterPwdDisarm() {
-		statusScreen.setText("Enter Passwors to Cancel");
+		statusScreen.setText("Enter Password to Cancel");
 	}
 
 	@Override
