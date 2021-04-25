@@ -81,7 +81,6 @@ public class StayDisarmState extends AlarmState implements Notifiable {
 
 	@Override
 	public void enter() {
-//		AlarmContext.instance().disarmStayOfButton();
 		timer = new Timer(this, 10);
 		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 	}
@@ -90,7 +89,6 @@ public class StayDisarmState extends AlarmState implements Notifiable {
 	public void leave() {
 		timer.stop();
 		timer = null;
-//		AlarmContext.instance().showTimeAway(0);
 
 	}
 

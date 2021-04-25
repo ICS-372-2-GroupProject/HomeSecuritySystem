@@ -55,7 +55,6 @@ public class UnarmedState extends AlarmState {
 	@Override
 	public void enter() {
 		AlarmContext.instance().showNotReady();
-//		AlarmContext.instance().unarmedOfButton();
 	}
 
 	@Override

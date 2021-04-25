@@ -81,7 +81,6 @@ public class AwayDisarmState extends AlarmState implements Notifiable {
 
 	@Override
 	public void enter() {
-//		AlarmContext.instance().disarmAwayOfButton();
 		timer = new Timer(this, 10);
 		AlarmContext.instance().showTimeAway(timer.getTimeValue());
 	}

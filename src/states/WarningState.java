@@ -57,7 +57,7 @@ public class WarningState extends AlarmState implements Notifiable {
 	 */
 	@Override
 	public void handleEvent(PasswordEvent event) {
-//		AlarmContext.instance().showTimeLeft(0);
+		// AlarmContext.instance().showTimeLeft(0);
 		if (AlarmContext.instance().getZoneReadiness()) {
 			AlarmContext.instance().changeState(ReadyState.instance());
 		} else {
@@ -92,7 +92,6 @@ public class WarningState extends AlarmState implements Notifiable {
 	 */
 	@Override
 	public void enter() {
-//		AlarmContext.instance().warningOfButton();
 		timer = new Timer(this, 15);
 		AlarmContext.instance().showTimeLeft(timer.getTimeValue());
 
@@ -102,7 +101,6 @@ public class WarningState extends AlarmState implements Notifiable {
 	public void leave() {
 		timer.stop();
 		timer = null;
-//		AlarmContext.instance().showTimeLeft(0);
 
 	}
 
