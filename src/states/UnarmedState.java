@@ -23,43 +23,50 @@ import events.ZonesReadyEvent;
  */
 
 /**
- * Represents the alarm unarmed state
+ * Represents the alarm unarmed state. Modified from instructional code given by
+ * Brahma Dathan.
  *
  */
 public class UnarmedState extends AlarmState {
-	private static UnarmedState instance;
+    private static UnarmedState instance;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private UnarmedState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private UnarmedState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static UnarmedState instance() {
-		if (instance == null) {
-			instance = new UnarmedState();
-		}
-		return instance;
-	}
+    /**
+     * Returns the instance
+     * 
+     * @return this object
+     */
+    public static UnarmedState instance() {
+        if (instance == null) {
+            instance = new UnarmedState();
+        }
+        return instance;
+    }
 
-	@Override
-	public void handleEvent(ZonesReadyEvent event) {
-		AlarmContext.instance().changeState(ReadyState.instance());
-	}
+    /**
+     * Process request when all zones are ready.
+     */
+    @Override
+    public void handleEvent(ZonesReadyEvent event) {
+        AlarmContext.instance().changeState(ReadyState.instance());
+    }
 
-	@Override
-	public void enter() {
-		AlarmContext.instance().showNotReady();
-	}
+    /**
+     * Initializes the state.
+     */
+    @Override
+    public void enter() {
+        AlarmContext.instance().showNotReady();
+    }
 
-	@Override
-	public void leave() {
+    @Override
+    public void leave() {
 
-	}
+    }
 
 }

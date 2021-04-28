@@ -24,56 +24,58 @@ import events.ZonesUnreadyEvent;
  */
 
 /**
- * Represents the Stay armed state
+ * Represents the Stay armed state. Modified from instructional code given by
+ * Brahma Dathan.
  *
  */
 public class StayArmedState extends AlarmState {
-	private static StayArmedState instance;
+    private static StayArmedState instance;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private StayArmedState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private StayArmedState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static StayArmedState instance() {
-		if (instance == null) {
-			instance = new StayArmedState();
-		}
-		return instance;
-	}
+    /**
+     * Returns the instance
+     * 
+     * @return this object
+     */
+    public static StayArmedState instance() {
+        if (instance == null) {
+            instance = new StayArmedState();
+        }
+        return instance;
+    }
 
-	/**
-	 * Process cancel button request
-	 */
-	@Override
-	public void handleEvent(CancelButtonEvent event) {
-		AlarmContext.instance().changeState(StayDisarmState.instance());
-	}
+    /**
+     * Process Cancel button request
+     */
+    @Override
+    public void handleEvent(CancelButtonEvent event) {
+        AlarmContext.instance().changeState(StayDisarmState.instance());
+    }
 
-	/**
-	 * Process Zone unready
-	 */
-	@Override
-	public void handleEvent(ZonesUnreadyEvent event) {
-		AlarmContext.instance().changeState(BreachedState.instance());
-	}
+    /**
+     * Process zone unready warning request
+     */
+    @Override
+    public void handleEvent(ZonesUnreadyEvent event) {
+        AlarmContext.instance().changeState(BreachedState.instance());
+    }
 
-	@Override
-	public void enter() {
-		AlarmContext.instance().showStay();
+    /**
+     * Initialize the state
+     */
+    @Override
+    public void enter() {
+        AlarmContext.instance().showStay();
 
-	}
+    }
 
-	@Override
-	public void leave() {
-		// TODO Auto-generated method stub
-
-	}
+    @Override
+    public void leave() {
+    }
 
 }

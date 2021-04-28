@@ -26,64 +26,74 @@ import timer.Timer;
  */
 
 /**
- * Represents the Away arming state
+ * Represents the Away arming state. Modified from instructional code given by
+ * Brahma Dathan.
  *
  */
 public class AwayArmingState extends AlarmState implements Notifiable {
-	private static AwayArmingState instance;
-	private Timer timer;
+    private static AwayArmingState instance;
+    private Timer timer;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private AwayArmingState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private AwayArmingState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static AwayArmingState instance() {
-		if (instance == null) {
-			instance = new AwayArmingState();
-		}
-		return instance;
-	}
+    /**
+     * Returns the instance
+     * 
+     * @return this object
+     */
+    public static AwayArmingState instance() {
+        if (instance == null) {
+            instance = new AwayArmingState();
+        }
+        return instance;
+    }
 
-	/**
-	 * Initializes the state Adds itself as a listener to managers Updates the
-	 * displays
-	 * 
-	 */
-	@Override
-	public void enter() {
-		timer = new Timer(this, 10);
-		AlarmContext.instance().showTimeAway(timer.getTimeValue());
-	}
+    /**
+     * Process clock tick event.
+     */
+    @Override
+    public void handleEvent(TimerTickedEvent event) {
+        AlarmContext.instance().showTimeAway(timer.getTimeValue());
 
-	@Override
-	public void leave() {
-		timer.stop();
-		timer = null;
-		AlarmContext.instance().showTimeAway(0);
-	}
+    }
 
-	@Override
-	public void handleEvent(TimerTickedEvent event) {
-		AlarmContext.instance().showTimeAway(timer.getTimeValue());
+    /**
+     * Process request when timer runs out.
+     */
+    @Override
+    public void handleEvent(TimerRanOutEvent event) {
+        AlarmContext.instance().showTimeAway(0);
+        if (AlarmContext.instance().getZoneReadiness()) {
+            AlarmContext.instance().changeState(AwayArmedState.instance());
+        } else {
+            AlarmContext.instance().changeState(UnarmedState.instance());
+        }
 
-	}
+    }
 
-	@Override
-	public void handleEvent(TimerRanOutEvent event) {
-		AlarmContext.instance().showTimeAway(0);
-		if (AlarmContext.instance().getZoneReadiness()) {
-			AlarmContext.instance().changeState(AwayArmedState.instance());
-		} else {
-			AlarmContext.instance().changeState(UnarmedState.instance());
-		}
+    /**
+     * Initializes the state. Adds itself as a listener to managers Updates the
+     * displays
+     */
 
-	}
+    @Override
+    public void enter() {
+        timer = new Timer(this, 10);
+        AlarmContext.instance().showTimeAway(timer.getTimeValue());
+    }
+
+    /**
+     * Resets timer to null when state ends.
+     */
+    @Override
+    public void leave() {
+        timer.stop();
+        timer = null;
+        AlarmContext.instance().showTimeAway(0);
+    }
 
 }

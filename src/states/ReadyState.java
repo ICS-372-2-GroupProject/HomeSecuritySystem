@@ -25,52 +25,65 @@ import events.ZonesUnreadyEvent;
  */
 
 /**
- * Represents the alarm ready state
+ * Represents the alarm ready state. Modified from instructional code given by
+ * Brahma Dathan.
  *
  */
 public class ReadyState extends AlarmState {
-	private static ReadyState instance;
+    private static ReadyState instance;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private ReadyState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private ReadyState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static ReadyState instance() {
-		if (instance == null) {
-			instance = new ReadyState();
-		}
-		return instance;
-	}
+    /**
+     * Returns the instance
+     * 
+     * @return this object
+     */
+    public static ReadyState instance() {
+        if (instance == null) {
+            instance = new ReadyState();
+        }
+        return instance;
+    }
 
-	@Override
-	public void handleEvent(AwayButtonEvent event) {
-		AlarmContext.instance().changeState(AwayArmingState.instance());
-	}
+    /**
+     * Process the Away button request
+     */
+    @Override
+    public void handleEvent(AwayButtonEvent event) {
+        AlarmContext.instance().changeState(AwayArmingState.instance());
+    }
 
-	@Override
-	public void handleEvent(StayButtonEvent event) {
-		AlarmContext.instance().changeState(StayArmingState.instance());
-	}
+    /**
+     * Process the Stay button request
+     */
+    @Override
+    public void handleEvent(StayButtonEvent event) {
+        AlarmContext.instance().changeState(StayArmingState.instance());
+    }
 
-	@Override
-	public void handleEvent(ZonesUnreadyEvent event) {
-		AlarmContext.instance().changeState(UnarmedState.instance());
-	}
+    /**
+     * Process request when a zone is unready.
+     */
+    @Override
+    public void handleEvent(ZonesUnreadyEvent event) {
+        AlarmContext.instance().changeState(UnarmedState.instance());
+    }
 
-	@Override
-	public void enter() {
-		AlarmContext.instance().showReady();
-	}
+    /**
+     * Initializes the state.
+     */
+    @Override
+    public void enter() {
+        AlarmContext.instance().showReady();
+    }
 
-	@Override
-	public void leave() {
-	}
+    @Override
+    public void leave() {
+    }
 
 }

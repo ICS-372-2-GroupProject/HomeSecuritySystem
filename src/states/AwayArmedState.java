@@ -26,63 +26,66 @@ import timer.Notifiable;
  */
 
 /**
- * Represents the Away armed state
+ * Represents the Away armed state. Modified from instructional code given by
+ * Brahma Dathan.
  *
  */
 public class AwayArmedState extends AlarmState implements Notifiable {
-	private static AwayArmedState instance;
+    private static AwayArmedState instance;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private AwayArmedState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private AwayArmedState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static AwayArmedState instance() {
-		if (instance == null) {
-			instance = new AwayArmedState();
-		}
-		return instance;
-	}
+    /**
+     * Returns the instance
+     * 
+     * @return this object
+     */
+    public static AwayArmedState instance() {
+        if (instance == null) {
+            instance = new AwayArmedState();
+        }
+        return instance;
+    }
 
-	/**
-	 * Process movement warning request
-	 */
-	@Override
-	public void handleEvent(ZonesUnreadyEvent event) {
-		AlarmContext.instance().changeState(WarningState.instance());
-	}
+    /**
+     * Process zone unready warning request
+     */
+    @Override
+    public void handleEvent(ZonesUnreadyEvent event) {
+        AlarmContext.instance().changeState(WarningState.instance());
+    }
 
-	/**
-	 * Process movement warning request
-	 */
-	@Override
-	public void handleEvent(MovementEvent event) {
-		AlarmContext.instance().changeState(WarningState.instance());
-	}
+    /**
+     * Process movement warning request
+     */
+    @Override
+    public void handleEvent(MovementEvent event) {
+        AlarmContext.instance().changeState(WarningState.instance());
+    }
 
-	/**
-	 * Process cancel button request
-	 */
-	@Override
-	public void handleEvent(CancelButtonEvent event) {
-		AlarmContext.instance().changeState(AwayDisarmState.instance());
-	}
+    /**
+     * Process cancel button request
+     */
+    @Override
+    public void handleEvent(CancelButtonEvent event) {
+        AlarmContext.instance().changeState(AwayDisarmState.instance());
+    }
 
-	@Override
-	public void enter() {
-		AlarmContext.instance().showAway();
-	}
+    /**
+     * Initialize the state
+     */
+    @Override
+    public void enter() {
+        AlarmContext.instance().showAway();
+    }
 
-	@Override
-	public void leave() {
-		// TODO Auto-generated method stub
+    @Override
+    public void leave() {
 
-	}
+    }
 
 }

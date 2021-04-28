@@ -23,53 +23,55 @@ import events.PasswordEvent;
  */
 
 /**
- * Represents the alarm breached state
+ * Represents the alarm breached state. Modified from instructional code given
+ * by Brahma Dathan.
  *
  */
 public class BreachedState extends AlarmState {
-	private static BreachedState instance;
+    private static BreachedState instance;
 
-	/**
-	 * Private constructor for the singleton pattern
-	 */
-	private BreachedState() {
-	}
+    /**
+     * Private constructor for the singleton pattern
+     */
+    private BreachedState() {
+    }
 
-	/**
-	 * returns the instance
-	 * 
-	 * @return this object
-	 */
-	public static BreachedState instance() {
-		if (instance == null) {
-			instance = new BreachedState();
-		}
-		return instance;
-	}
+    /**
+     * Returns the instance
+     * 
+     * @return this object
+     */
+    public static BreachedState instance() {
+        if (instance == null) {
+            instance = new BreachedState();
+        }
+        return instance;
+    }
 
-	/**
-	 * Process movement warning request
-	 */
-	@Override
-	public void handleEvent(PasswordEvent event) {
-		if (AlarmContext.instance().getZoneReadiness()) {
-			AlarmContext.instance().changeState(ReadyState.instance());
-		} else {
+    /**
+     * Process request when password is entered
+     */
+    @Override
+    public void handleEvent(PasswordEvent event) {
+        if (AlarmContext.instance().getZoneReadiness()) {
+            AlarmContext.instance().changeState(ReadyState.instance());
+        } else {
 
-			AlarmContext.instance().changeState(UnarmedState.instance());
-		}
-	}
+            AlarmContext.instance().changeState(UnarmedState.instance());
+        }
+    }
 
-	@Override
-	public void enter() {
-		AlarmContext.instance().showSecurityBreached();
+    /**
+     * Initializes the state.
+     */
+    @Override
+    public void enter() {
+        AlarmContext.instance().showSecurityBreached();
 
-	}
+    }
 
-	@Override
-	public void leave() {
-		// TODO Auto-generated method stub
-
-	}
+    @Override
+    public void leave() {
+    }
 
 }

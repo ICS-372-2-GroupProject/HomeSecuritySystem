@@ -31,153 +31,202 @@ import events.ZonesUnreadyEvent;
 
 /**
  * The context is an observer for the clock and stores the context info for
- * states
+ * states. Modified from instructional code by Brahma Dathan.
  *
  */
 public class AlarmContext {
-	private AlarmDisplay display;
-	private AlarmState currentState;
-	private static AlarmContext instance;
+    private AlarmDisplay display;
+    private AlarmState currentState;
+    private static AlarmContext instance;
 
-	/**
-	 * Make it a singleton
-	 */
-	private AlarmContext() {
-		instance = this;
-		currentState = UnarmedState.instance();
-	}
+    /**
+     * Make it a singleton
+     */
+    private AlarmContext() {
+        instance = this;
+        currentState = UnarmedState.instance();
+    }
 
-	/**
-	 * Return the instance
-	 * 
-	 * @return the object
-	 */
-	public static AlarmContext instance() {
-		if (instance == null) {
-			instance = new AlarmContext();
-		}
-		return instance;
-	}
+    /**
+     * Return the instance
+     * 
+     * @return the object
+     */
+    public static AlarmContext instance() {
+        if (instance == null) {
+            instance = new AlarmContext();
+        }
+        return instance;
+    }
 
-	/**
-	 * The display could change. So we have to get its refrence.
-	 * 
-	 * @param display
-	 *            The current display object
-	 */
-	public void setDisplay(AlarmDisplay display) {
-		this.display = display;
-	}
+    /**
+     * The display could change. So we have to get its reference.
+     * 
+     * @param display The current display object
+     */
+    public void setDisplay(AlarmDisplay display) {
+        this.display = display;
+    }
 
-	public boolean getZoneReadiness() {
-		return display.checkZones();
-	}
+    public boolean getZoneReadiness() {
+        return display.checkZones();
+    }
 
-	public boolean enterPassword(int number) {
-		if (currentState == WarningState.instance()
-				|| currentState == BreachedState.instance()
-				|| currentState == AwayDisarmState.instance()
-				|| currentState == StayDisarmState.instance()) {
+    /**
+     * Only allows password entry if in the proper state.
+     * 
+     * @param number digits entered through interface
+     * @return boolean if password is entered at the right time
+     */
+    public boolean enterPassword(int number) {
+        if (currentState == WarningState.instance()
+                || currentState == BreachedState.instance()
+                || currentState == AwayDisarmState.instance()
+                || currentState == StayDisarmState.instance()) {
+            return display.enterPassword(number);
+        }
+        return false;
+    }
 
-			return display.enterPassword(number);
-		}
-		return false;
-	}
+    /**
+     * Lets the Unarmed state be the starting state and adds the object as an
+     * observable for clock
+     */
+    public void initialize() {
+        instance.changeState(UnarmedState.instance());
+    }
 
-	/**
-	 * Lets Unarmed state be the starting state adds the object as an observable
-	 * for clock
-	 */
-	public void initialize() {
-		instance.changeState(UnarmedState.instance());
-	}
+    /**
+     * Called from the states to change the current state
+     * 
+     * @param nextState the next state
+     */
+    public void changeState(AlarmState nextState) {
+        currentState.leave();
+        currentState = nextState;
+        currentState.enter();
+    }
 
-	/**
-	 * Called from the states to change the current state
-	 * 
-	 * @param nextState
-	 *            the next state
-	 */
-	public void changeState(AlarmState nextState) {
-		currentState.leave();
-		currentState = nextState;
-		currentState.enter();
-	}
+    /**
+     * Process Away button request
+     */
+    public void handleEvent(AwayButtonEvent event) {
+        currentState.handleEvent(event);
+    }
 
-	public void handleEvent(AwayButtonEvent event) {
-		currentState.handleEvent(event);
-	}
+    /**
+     * Process Stay button request
+     */
+    public void handleEvent(StayButtonEvent event) {
+        currentState.handleEvent(event);
+    }
 
-	public void handleEvent(StayButtonEvent event) {
-		currentState.handleEvent(event);
-	}
+    /**
+     * Process request when password is correctly entered
+     */
+    public void handleEvent(PasswordEvent event) {
+        currentState.handleEvent(event);
+    }
 
-	public void handleEvent(PasswordEvent event) {
-		currentState.handleEvent(event);
-	}
+    /**
+     * Process request when movement is detected.
+     */
+    public void handleEvent(MovementEvent event) {
+        currentState.handleEvent(event);
+    }
 
-	public void handleEvent(MovementEvent event) {
-		currentState.handleEvent(event);
-	}
+    /**
+     * Process request when zones are ready
+     */
+    public void handleEvent(ZonesReadyEvent event) {
+        currentState.handleEvent(event);
+    }
 
-	public void handleEvent(ZonesReadyEvent event) {
-		currentState.handleEvent(event);
-	}
+    /**
+     * Process request when zones are not ready
+     */
+    public void handleEvent(ZonesUnreadyEvent event) {
+        currentState.handleEvent(event);
+    }
 
-	public void handleEvent(ZonesUnreadyEvent event) {
-		currentState.handleEvent(event);
-	}
+    /**
+     * Process Cancel button request
+     */
+    public void handleEvent(CancelButtonEvent event) {
+        currentState.handleEvent(event);
+    }
 
-	public void handleEvent(CancelButtonEvent event) {
-		currentState.handleEvent(event);
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showTimeLeft(int time) {
+        display.showTimeLeft(time);
+    }
 
-	/**
-	 * This invokes the right method of the display. This helps protect the
-	 * states from changes to the way the system utilizes the state changes.
-	 * 
-	 * @param time
-	 *            time left for cooking
-	 */
-	public void showTimeLeft(int time) {
-		display.showTimeLeft(time);
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showTimeAway(int time) {
+        display.showTimeAway(time);
+    }
 
-	public void showTimeAway(int time) {
-		display.showTimeAway(time);
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showTimeStay(int time) {
+        display.showTimeStay(time);
+    }
 
-	public void showTimeStay(int time) {
-		display.showTimeStay(time);
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showNotReady() {
+        display.showNotReady();
+    }
 
-	public void showNotReady() {
-		display.showNotReady();
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showReady() {
+        display.showReady();
+    }
 
-	public void showReady() {
-		display.showReady();
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showAway() {
+        display.showAway();
+    }
 
-	/**
-	 * @param time
-	 *            time left for cooking
-	 */
-	public void showAway() {
-		display.showAway();
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showStay() {
+        display.showStay();
+    }
 
-	public void showStay() {
-		display.showStay();
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showSecurityBreached() {
+        display.showSecurityBreached();
 
-	public void showSecurityBreached() {
-		display.showSecurityBreached();
+    }
 
-	}
+    /**
+     * This invokes the right method of the display. This helps protect the
+     * states from changes to the way the system utilizes the state changes.
+     */
+    public void showEnterPwdDisarm() {
+        display.showEnterPwdDisarm();
 
-	public void showEnterPwdDisarm() {
-		display.showEnterPwdDisarm();
-
-	}
+    }
 }
